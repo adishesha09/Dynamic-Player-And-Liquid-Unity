@@ -13,6 +13,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     // Serialized fields for player movement and wall climbing parameters.
     [Header("Movement Variables")]
+    public float rotationSmoothness = 8f;
     public float walkSpeed = 4f;
     public float sprintSpeed = 8f;
     public float crouchSpeed = 2f;
@@ -61,12 +62,31 @@ public class NewMonoBehaviourScript : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        // Calculates horizontal movement vector in local space.
-        Vector3 movePlayer = transform.right * horizontal + transform.forward * vertical;
-        controller.Move(movePlayer * speed * Time.deltaTime);
+        // Calculate movement direction relative to camera orientation
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+        
+        // Ignore camera pitch for ground movement
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
 
-        // Pass movement to the Animator
-        animator.SetFloat("Speed", movePlayer.magnitude * speed);
+        // Calculate movement vector relative to camera
+        Vector3 moveDirection = (cameraForward * vertical + cameraRight * horizontal).normalized;
+
+        if (moveDirection.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 
+                rotationSmoothness * Time.deltaTime);
+        }
+
+        // Apply movement in world space
+        controller.Move(moveDirection * speed * Time.deltaTime);
+
+        // Pass movement to the Animator (use relative speed)
+        animator.SetFloat("Speed", Mathf.Clamp01(moveDirection.magnitude) * (speed / walkSpeed));
     }
 
     void HandleJump()
