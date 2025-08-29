@@ -91,7 +91,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void HandleJump()
     {
-        if (isGrounded && Input.GetKey(KeyCode.Z))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Z))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetTrigger("Jump");
