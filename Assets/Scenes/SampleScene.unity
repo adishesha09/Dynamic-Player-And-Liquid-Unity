@@ -241,9 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ac91dbb1dc5424e8d4bdf46764a586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liquidMaterial: {fileID: 0}
-  maxRipples: 8
-  defaultRippleStrength: 1
 --- !u!1 &200818204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,7 +1688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 546, y: 181}
+  m_AnchoredPosition: {x: 469, y: 310}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637645129
@@ -2022,7 +2019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 546, y: 182}
+  m_AnchoredPosition: {x: 467, y: 309}
   m_SizeDelta: {x: 385, y: 385}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700458192
