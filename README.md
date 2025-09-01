@@ -18,6 +18,9 @@ A real-time top-down view of the player's surroundings, providing essential spat
 - **Verticality:** Jump and Wall Climbing  
 - **Ground Slides:** Crouch and Momentum-based Sliding 
 
+### Dynamic Camera System
+A real-time camera that tracks and follows the player's position
+
 ## In Development
 
 ### Dynamic Liquid Interaction System
