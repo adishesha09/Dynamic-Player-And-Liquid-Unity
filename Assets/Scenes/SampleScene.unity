@@ -1521,7 +1521,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   waterRipple: {fileID: 26600631}
-  rippleStrength: 0.5
+  rippleStrength: 1
 --- !u!4 &1220036222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3d841dd260a1e214cb71d9c0ddd09644, type: 3}
