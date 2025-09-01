@@ -42,13 +42,13 @@ public class WaterRipple : MonoBehaviour
     {
         UnityEngine.Vector3 localPos = transform.InverseTransformPoint(worldPos);
 
-        float u = (localPos.x + 0.5f) * textureSize;
-        float v = (localPos.z + 0.5f) * textureSize;
+        float u = localPos.x + 0.5f;
+        float v = localPos.z + 0.5f;
 
         int x = Mathf.FloorToInt(u * textureSize);
         int y = Mathf.FloorToInt(v * textureSize);
 
-        if (x < 1 || x >= textureSize - 1 || y < 1 || y >= textureSize - 1)
+        if (x >= 1 && x < textureSize - 1 && y >= 1 && y < textureSize - 1)
         {
             int idx = y * textureSize + x;
 

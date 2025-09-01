@@ -32,6 +32,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private bool isSliding;
     private bool isClimbing;
 
+    [Header("Water Ripple Interaction")]
+    public WaterRipple waterRipple;
+    public float rippleStrength = 0.5f;
+
     void Start()
     {
         // Automatically assign components
@@ -85,8 +89,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // Apply movement in world space
         controller.Move(moveDirection * speed * Time.deltaTime);
 
+        // Create ripple effect when moving on water surface
+        if (isGrounded && moveDirection.sqrMagnitude > 0.01f && waterRipple != null)
+        {
+            Vector3 footPosition = transform.position;
+            waterRipple.AddRipple(footPosition);
+        }
+
         // Pass movement to the Animator (use relative speed)
-        animator.SetFloat("Speed", Mathf.Clamp01(moveDirection.magnitude) * (speed / walkSpeed));
+            animator.SetFloat("Speed", Mathf.Clamp01(moveDirection.magnitude) * (speed / walkSpeed));
     }
 
     void HandleJump()
@@ -95,6 +106,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetTrigger("Jump");
+
+            // Ripple effect when pushing off water surface
+            if (waterRipple != null)
+                 waterRipple.AddRipple(transform.position);
         }
     }
 
@@ -154,6 +169,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
         else if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f; // Ensure player stays grounded
+
+            // Ripple effect when landing on water surface
+            if (waterRipple != null)
+                waterRipple.AddRipple(transform.position);
         }
     } 
 }
